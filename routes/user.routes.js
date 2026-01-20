@@ -68,7 +68,27 @@ router.post('/login',
         return res.status(400).json({message:"Invalid credentials"});
     }
 
-    res.json({message:"Login successful"});
+
+    const token=jwt.sign({
+        userID:user._id,
+        email:user.email,
+        username:user.username
+    },
+    process.env.JWT_SECRET,
+    {
+        expiresIn:'1h'
+    }
+    );
+
+    res.json({token
+    })
+
+
+
+
+
+
+
 })
 
 
