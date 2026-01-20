@@ -42,7 +42,7 @@ router.get('/login',(req,res)=>{
 })
 
 router.post('/login',
-    body('username ').trim().isLength({min:3}),
+    body('username').trim().isLength({min:3}),
     body('password').trim().isLength({min:5}),
 
    async  (req,res)=>{
@@ -80,14 +80,17 @@ router.post('/login',
     }
     );
 
-    res.json({token
-    })
+    // res.cookie('token',token,{
+    //     httpOnly:true,
+    //     secure:process.env.NODE_ENV==='production',
+    //     sameSite:'strict',
+    //     maxAge:3600000
+    // })
+    res.cookie('token', token)
 
 
 
-
-
-
+    res.json({message:"Login successful"}); 
 
 })
 
